@@ -1,0 +1,23 @@
+name: Teste API GitHub
+
+on:
+  workflow_dispatch: # permite rodar manualmente
+
+jobs:
+  api-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Instalar deps
+        run: npm install
+
+      - name: Rodar script
+        run: node script.js
+        env:
+          GITHUB_TOKEN: ${{ secrets.REPOSITORY_SECRET }}
